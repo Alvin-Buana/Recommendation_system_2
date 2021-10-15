@@ -28,86 +28,108 @@ Model yang saya akan gunakan untuk mendukung *collaborative filtering* yaitu den
 
 ## Data Understanding
 
-Dataset ini didapat dari [kaggle](https://www.kaggle.com/). Dalam platform tersebut terdapat banyak dataset dari berbagai sumber dan perusahaan yang dapat membantu para pemula mengerti tentang dunia ilmuwan data. Untuk projek ini, saya mengambil data yang bernama [Movie Recommendation System](https://www.kaggle.com/dev0914sharma/dataset). Berikut adalah keterangan mengenai maksud dari variabel - variabel atau kolom tersebut :
+Dataset ini didapat dari [kaggle](https://www.kaggle.com/). Dalam platform tersebut terdapat banyak dataset dari berbagai sumber dan perusahaan yang dapat membantu para pemula mengerti tentang dunia ilmuwan data. Untuk projek ini, saya mengambil data yang bernama [Movie Lens Dataset](https://www.kaggle.com/aigamer/movie-lens-dataset). Berikut adalah keterangan mengenai maksud dari variabel - variabel atau kolom tersebut :
 
-- Dataset.csv
-    - user_id   : ID pengguna (data type : int 64)
-    - item_id   : ID film     (data type : int 64)
-    - rating    : Penilaian pengguna terhadap film terkait (data type : int 64)
+- Ratings.csv
+    - userId   : ID pengguna (data type : int 64)
+    - movieId   : ID film     (data type : int 64)
+    - rating    : Penilaian pengguna terhadap film terkait (data type : float 64)
     - timestamp : kode waktu film  (data type : int 64)
-- Movie_Id_Title.csv
-    - item_id   : ID film (data type : int 64)
+- Movie.csv
+    - movieId   : ID film (data type : int 64)
     - title     : judul film bersama tahun rilis (data type : object)
+    - genres    : Genre pada film tersebut (data type : object)
 
-Dalam proses data understanding, saya menggunakan visualisasi data berupa histogram karena saya ingin mengetahui seberapa banyak film yang dipublish dari dataset tersebut.Tentu pertama saya harus memisahkan atau membuat kolom baru untuk mengambil tahun dari kolom *title*. Berikut adalah histogram yang ditampilkan dari dataset **Movie_Id_Title.csv** :
+Dalam proses data understanding, saya menggunakan visualisasi data berupa histogram karena saya ingin mengetahui seberapa banyak film yang dipublish dari dataset tersebut.Tentu pertama saya harus memisahkan atau membuat kolom baru untuk mengambil tahun dari kolom *title*. Berikut adalah histogram yang ditampilkan dari dataset **Movie.csv** :
 
-![image](https://user-images.githubusercontent.com/82896196/135897150-3a265f1a-ef17-402c-834f-7fe8d0949707.png)
+![image](https://user-images.githubusercontent.com/82896196/137433911-95740ee3-2bad-47a4-adc8-709aef5e1068.png)
 
-Dari gambar tersebut, bisa dilihat bahwa tahun 1990 sampai dengan 1998 yang memiliki film rilis terbanyak ketimbang tahun sebelumnya. 
+Dari gambar tersebut, bisa dilihat bahwa tahun 1998 sampai 2005 yang memiliki film rilis terbanyak ketimbang tahun sebelumnya. 
 
 Selain itu, saya juga membuat *count plot* dari *library seaborn* untuk melihat 10 besar film yang sudah dirilis. *Count plot* sendiri adalah sebuah visualisasi data dari *seaborn* yang digunakan untuk menghitung seberapa banyak data dalam suatu label. Visualisasi ini didapatkan dari berapa banyak pengguna yang memberi penilaian kepada suatu film. Berikut adalah hasil dari visualisasi tersebut : 
 
-![image](https://user-images.githubusercontent.com/82896196/135897861-b9f848fd-7e90-4d8c-a4d2-dba456f691e4.png)
+![image](https://user-images.githubusercontent.com/82896196/137433769-9a1fe2b6-4454-47fe-862c-e88360946db5.png)
 
-Jika kita lihat baik - baik, *Star Wars* memiliki tingkat popularitas yang tinggi karena film tersebut memiliki pemberian nilai terbanyak oleh para pengguna. Ditambah lagi, tahun rilis *Star Wars*  adalah 1977 yang menandakan bahwa film tersebut merupakan film yang sangat populer dan bahkan mengalahkan film yang sudah dirilis pada tahun 1990- 1998.
+Jika kita lihat baik - baik, *Forrest Gump* memiliki tingkat popularitas yang tinggi karena film tersebut memiliki pemberian nilai terbanyak oleh para pengguna.
 
-Selanjutnya saya melihat jumlah rating dalam data tersebut. Saya ingin melihat seberapa banyak pengguna yang puas ketika menonton suatu film. Untuk mendapatkan jawaban dari kalimat sebelumnya, saya akan menggunakan visualisasi data yang sama seperti sebelumnya yaitu *count plot*.  Berikut adalah hasil untuk mengetahui jumlah rating yang diberikan user :
+Selanjutnya saya melihat jumlah genres dalam data tersebut. Saya ingin melihat seberapa banyak genre yang ada dalam dataset ini. Untuk mendapatkan jawaban dari kalimat sebelumnya, saya akan menggunakan visualisasi data yang sama seperti sebelumnya yaitu *count plot*.  Berikut adalah hasil untuk mengetahui jumlah genre pada film :
 
-![image](https://user-images.githubusercontent.com/82896196/135898524-42be8bfc-ae85-4f68-b6d8-1dbacc2ae169.png)
+![image](https://user-images.githubusercontent.com/82896196/137434068-35b181e7-527b-41b0-904b-32404a63473f.png)
 
-Gambar ini menunjukan bahwa banyak pengguna yang puas dengan menonton suatu film tetapi mereka tidak merasa sangat puas dengan film yang ditonton. Hal ini dapat dibuktikan dengan besarnya jumlah rating 4 jika dibandingkan dengan yang lain.
+
+Gambar ini menunjukan bahwa genre *drama* adalah genre yang paling banyak jika dibandingkan dengan genre lainnya.
+
+Jika kita hubungkan satu data dengan lainnya:
+
+![image](https://user-images.githubusercontent.com/82896196/137434270-b87d5121-030c-4cd8-a631-5e7592fa6351.png)
+
+Film yang berjudul "*Forrest Gump*" merupakan film favorit karena telah mendapat jumlah rating terbanyak dan genre film ini adalah genre yang mengandung drama. Sehingga kita bisa simpulkan bahwa pada saat itu banyak pengguna yang suka dengan film drama.
+
 
 ## Data Preparation 
 
-Dalam data preparation, ada beberapa teknik yang saya gunakan untuk proses *preparation*. Selain itu, ada 3 dataset yang saya akan periksa yaitu dataset.csv yang dinamakan sebagai rating, Movie_Id_Title.csv yand dinamakan sebagai movie, dan gabungan kedua dataset yang dinamakan df. Berikut penjelasan kedua teknik yang akan digunakan untuk *data preparation*dan hasil dari teknik tersebut :
+Dalam data preparation, ada beberapa teknik yang saya gunakan untuk proses *preparation*. Selain itu, ada 3 dataset yang saya akan periksa yaitu rating.csv yang dinamakan sebagai df_rating, Movie.csv yand dinamakan sebagai df_movie, dan gabungan kedua dataset yang dinamakan df. Berikut penjelasan beberapa teknik yang akan digunakan untuk *data preparation*dan hasil dari teknik tersebut :
 
 1. Cek data null
     Data null dapat membuat suatu hasil prediksi model menjadi tidak akurat. Cara untuk melihat apakah data ini mengandung null atau tidak adalah dengan menggunakan *method* dari *library* *pandas* yaitu *isnull()*. Berikut adalah hasil dari cek data null oleh *pandas* :
     
-    ![image](https://user-images.githubusercontent.com/82896196/135950487-e3cd97df-2b01-41da-aae2-267afcce09cc.png)
+    ![image](https://user-images.githubusercontent.com/82896196/137434853-6598fa72-32fd-422d-ae58-27bb911b5f37.png)
+
     
-    ![image](https://user-images.githubusercontent.com/82896196/135950515-382d0074-9b23-40f3-8bb8-f8a946362acd.png)
-    
-    ![image](https://user-images.githubusercontent.com/82896196/135950540-f51e8325-92ac-4f2f-b231-b3c918d4318c.png)
-    
-    Dari hasil ketiga gambar ini, kita bisa simpulkan bahwa data ini tidak memiliki null sehungga kita tidak perlu melakukan teknik penghapusan data null. tetapi jikalau ada maka kita akan menggunakan kode berikut untuk menghapus data null.
+     Dari hasil ketiga gambar ini, kita bisa simpulkan bahwa data ini tidak memiliki null sehungga kita tidak perlu melakukan teknik penghapusan data null. tetapi jikalau ada maka kita akan menggunakan kode berikut untuk menghapus data null.
     
     *dataframe.dropna()*
     
-    Kode ini berfungsi untuk menghapuskan data yang memiliki null values di dalam row setiap data.
+     Kode ini berfungsi untuk menghapuskan data yang memiliki null values di dalam row setiap data.
     
 3. Cek duplikat data
     Selain data null, duplikat data juga bisa membuat model menjadi tidak akurat. Untuk memastikan apakah data memiliki data duplikat, maka kita akan menggunakan *method* lainnya yang juga berasal dari *pandas* yaitu *duplicated*. Berikut adalah hasil dari cek data duplikat :
     
-    ![image](https://user-images.githubusercontent.com/82896196/135951011-7a6fd8a5-1073-4151-be54-509298a706c7.png)
-    
-    ![image](https://user-images.githubusercontent.com/82896196/135951025-19577b07-bc89-4c44-881a-64198ebe5c9e.png)
-    
-    ![image](https://user-images.githubusercontent.com/82896196/135951038-b8fbe29e-aaff-4ede-8978-bc7b207adc0d.png)
+    ![image](https://user-images.githubusercontent.com/82896196/137435012-3e7e50e1-0857-461b-829b-0fa7df89c2c3.png)
 
     Hasil dari gambar ini adalah tanda bahwa dataset kita merupakan dataset yang baik karena dataset ini tidak memiliki duplikat ataupun data null. 
     
 4. Data encoding
     Untuk data encoding, dataset yang akan digunakan hanya df atau gabungan dari kedua dataset sebelumnya karena data yang akan digunakan untuk model adalah dataset df ini. Untuk penggunaanya, saya membuat encoding atau menyandikan nilai unik dari kolom user_id. Lalu saya melakukan proses encoding angka ke user_id. Hal yang serupa saya lakukan kepada item_id. Kemudian saya memetakan hasil dari encoding tersebut ke dalam dataframe df. Hasil dari data encoding adalah sebagai berikut :
     
-    ![image](https://user-images.githubusercontent.com/82896196/135955577-830c20b5-6bac-441a-b9c2-261c92210844.png)
+    ![image](https://user-images.githubusercontent.com/82896196/137435207-03f1f1ae-ff48-478d-b442-a0186a325184.png)
 
     Hasil dari data encoding ini akan digunakan untuk model deep learning. 
     
-5. Pivot table and matrix
+5. One-Hot Encoding
+     Proses ini digunakan untuk *cosine similarity*. Pertama saya membuat one hot encoding pada genre karena setiap film mempunyai jumlah genre yang berbeda dan genre yang bervariasi. Saya membuat kolom baru untuk setiap nilai genre yang terdapat dalam kolom genres. Berikut adalah hasil dari one-hot encoding tersebut : 
+     
+     ![image](https://user-images.githubusercontent.com/82896196/137435663-34d58040-1351-4332-bc03-0bdb3529febc.png)
 
-    Proses ini digunakan untuk clustering model. Pertama saya membuat pivot table yang berisi tentang film dan user. Hal ini bertujuan untuk mengetahui berapa film yang belum diberi rating oleh user dan berapa film yang sudah diberi rating oleh user. Kemudian, saya membuat data pivot ini menjadi data matrix *compressed sparse row* dengan bantuan *library* *scipy*.  Berikut adalah hasil dari metode data preparation ini :
+     Data preparation ini digunakan untuk proses selanjutnya yaitu mengubah data one hot encoding ini menjadi data matrix.
+     
+     
+6. Matrix
+
+    Proses ini digunakan untuk *cosine similarity*. Hal ini dilakukan setelah saya melakukan one hot encoding pada kolom genres.Setelah itu, saya mengubah data yang sudah dimasukan kedalam one-hot encoding menjadi data matrix *compressed sparse row* dengan bantuan *library* *scipy*.  Berikut adalah hasil dari metode data preparation ini :
     
-    ![image](https://user-images.githubusercontent.com/82896196/135956843-755a0326-fef1-4dc5-a9d9-3634bb5dfecd.png)
+    ![image](https://user-images.githubusercontent.com/82896196/137435502-059a9eab-1c62-4dee-87fa-f7193b2a34a8.png)
 
+    
 
 Selanjutnya kita akan masuk ke dalam tahap modeling dan result.
 
 
 ## Modeling and Result
 
-Untuk tahap modeling, saya menggunakan *neural network* dan *
+Untuk tahap modeling, saya menggunakan *neural network* dan *Cosine Simirality* untuk sistem rekomendasi berbasis *collaborative filtering* dan *content-based filtering*. Untuk model deep learning, saya gunakan untuk sistem rekomendasi berbasis *collaborative filtering* dimana model ini akan menghasilkan rekomendasi untuk satu pengguna. Berikut adalah hasil prediksi dari model deep learning tersebut :
 
+   ![image](https://user-images.githubusercontent.com/82896196/137435919-d69f9353-5f1f-4796-bd25-be06cc345e20.png)
+    
+Pada hasil gambar ini, kita bisa melihat bahwa pengguna id nomor 226 sangat menyukai Willy Wonka & the Chocolate Factory (1971) , Office Space (1999) , Wayne's World (1992) ,Endless Summer, The (1966) ,dan Bill & Ted's Excellent Adventure (1989). Oleh sebab itu, sistem ini akan merekomendasikan 10 film yang mirip dengan hasil tersebut seperti Silence of the Lambs, The (1991). 
+
+Untuk sistem rekomendasi berbasis *content-based filtering*, saya menggunakan *cosine similarity* yang akan menghitung kemiripan antara satu film dengan lainnya bedasarkan fitur yang terdapat pada satu film.Hasil dari model ini adalah pemberian 50 film rekomendasi bedasarkan genre. Berikut adalah hasil dari *cosine similarity* :
+
+   ![image](https://user-images.githubusercontent.com/82896196/137436303-848a53f0-f9df-4634-91e0-e2b70baa2ecc.png)
+
+Untuk model ini, saya sengaja memberi 50 rekomendasi film karena saya ingin menunjukan bahwa hasil dari model ini akan memberikan rekomendasi film dengan genre yang serupa dengan film yang direkomendasikan.
+
+    
 Untuk merangkum semua penjelasan, kedua model ini bisa digunakan untuk sistem rekomendasi berbasis *collaborative filtering* dan *content-based filtering*.
 
 ## Evaluation 
