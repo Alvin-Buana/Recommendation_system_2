@@ -52,7 +52,7 @@ Selain itu, saya juga membuat *count plot* dari *library seaborn* untuk melihat 
 
 Jika kita lihat baik - baik, *Forrest Gump* memiliki tingkat popularitas yang tinggi karena film tersebut memiliki pemberian nilai terbanyak oleh para pengguna.
 
-Selanjutnya saya melihat jumlah genres dalam data tersebut. Saya ingin melihat seberapa banyak genre yang ada dalam dataset ini. Untuk mendapatkan jawaban dari kalimat sebelumnya, saya akan menggunakan visualisasi data yang sama seperti sebelumnya yaitu *count plot*.  Berikut adalah hasil untuk mengetahui jumlah genre pada film :
+Selanjutnya saya melihat jumlah genres dalam data tersebut. Saya ingin melihat seberapa banyak genre yang ada dalam dataset ini. Untuk mendapatkan jawaban dari kalimat sebelumnya, saya akan menggunakan visualisasi data yang sama seperti sebelumnya yaitu *bar plot*.  Berikut adalah hasil untuk mengetahui jumlah genre pada film :
 
 ![image](https://user-images.githubusercontent.com/82896196/137434068-35b181e7-527b-41b0-904b-32404a63473f.png)
 
@@ -134,7 +134,7 @@ Untuk merangkum semua penjelasan, kedua model ini bisa digunakan untuk sistem re
 
 ## Evaluation 
 
-pada evaluation saya menggunakan tiga teknik yaitu *mean absolute error* , *root mean squared error*, dan metrik buatan saya yaitu *accurate*. bedasarkan [sumber](https://towardsdatascience.com/recommendation-systems-models-and-evaluation-84944a84fb8e) terkait, kedua metrik ini berhubungan dengan rating pengguna. Berikut adalah penjelasan terkait ketiga metrik ini :
+Pada evaluation saya menggunakan tiga teknik yaitu *mean absolute error* , *root mean squared error*, dan metrik buatan saya yaitu *accurate*. bedasarkan [sumber](https://towardsdatascience.com/recommendation-systems-models-and-evaluation-84944a84fb8e) terkait, kedua metrik ini berhubungan dengan rating pengguna. Berikut adalah penjelasan terkait ketiga metrik ini :
 
 - ***Mean Absolute Error*** : metrik ini digunakan untuk mengetahui kesalahan model atau memberitahu seberapa error model yang sudah di latih kepada data yang akan dites. berikut adalah rumus dari metrik tersebut.
         
