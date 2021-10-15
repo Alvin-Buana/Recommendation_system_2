@@ -76,7 +76,7 @@ Dalam data preparation, ada beberapa teknik yang saya gunakan untuk proses *prep
     ![image](https://user-images.githubusercontent.com/82896196/137434853-6598fa72-32fd-422d-ae58-27bb911b5f37.png)
 
     
-     Dari hasil ketiga gambar ini, kita bisa simpulkan bahwa data ini tidak memiliki null sehungga kita tidak perlu melakukan teknik penghapusan data null. tetapi jikalau ada maka kita akan menggunakan kode berikut untuk menghapus data null.
+     Dari hasil ketiga gambar ini, kita bisa simpulkan bahwa data ini tidak memiliki null sehingga kita tidak perlu melakukan teknik penghapusan data null. tetapi jikalau ada maka kita akan menggunakan kode berikut untuk menghapus data null.
     
     *dataframe.dropna()*
     
@@ -90,6 +90,7 @@ Dalam data preparation, ada beberapa teknik yang saya gunakan untuk proses *prep
     Hasil dari gambar ini adalah tanda bahwa dataset kita merupakan dataset yang baik karena dataset ini tidak memiliki duplikat ataupun data null. 
     
 4. Data encoding
+
     Untuk data encoding, dataset yang akan digunakan hanya df atau gabungan dari kedua dataset sebelumnya karena data yang akan digunakan untuk model adalah dataset df ini. Untuk penggunaanya, saya membuat encoding atau menyandikan nilai unik dari kolom user_id. Lalu saya melakukan proses encoding angka ke user_id. Hal yang serupa saya lakukan kepada item_id. Kemudian saya memetakan hasil dari encoding tersebut ke dalam dataframe df. Hasil dari data encoding adalah sebagai berikut :
     
     ![image](https://user-images.githubusercontent.com/82896196/137435207-03f1f1ae-ff48-478d-b442-a0186a325184.png)
