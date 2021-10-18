@@ -135,7 +135,7 @@ Untuk merangkum semua penjelasan, kedua model ini bisa digunakan untuk sistem re
 
 ## Evaluation 
 
-Pada evaluation saya menggunakan tiga teknik yaitu *mean absolute error* , *root mean squared error*, dan metrik buatan saya yaitu *accurate*. bedasarkan [sumber](https://towardsdatascience.com/recommendation-systems-models-and-evaluation-84944a84fb8e) terkait, kedua metrik ini berhubungan dengan rating pengguna. Berikut adalah penjelasan terkait ketiga metrik ini :
+Pada evaluation saya menggunakan tiga teknik yaitu *mean absolute error* , *root mean squared error*, dan metrik buatan saya yaitu *precision*. bedasarkan [sumber](https://towardsdatascience.com/recommendation-systems-models-and-evaluation-84944a84fb8e) terkait, kedua metrik ini berhubungan dengan rating pengguna. Berikut adalah penjelasan terkait ketiga metrik ini :
 
 - ***Mean Absolute Error*** : metrik ini digunakan untuk mengetahui kesalahan model atau memberitahu seberapa error model yang sudah di latih kepada data yang akan dites. berikut adalah rumus dari metrik tersebut.
         
@@ -147,12 +147,12 @@ Pada evaluation saya menggunakan tiga teknik yaitu *mean absolute error* , *root
 
     ![image](https://user-images.githubusercontent.com/82896196/135995423-74268008-5509-4f61-8d16-df0372eb827e.png)
     
-- ***accurate*** : untuk metrik ini, saya menghitung dengan total prediksi rekomendasi bedasarkan genre yang benar dibagi dengan total rekomendasi yang telah diberikan. Saya menggunakan metrik ini karena saya ingin mengetahui apakah model yang dipakai untuk *content-based learning* dapat memprediksi semua konten bedasarkan genre dengan benar. 
+- ***precision*** : untuk metrik ini, saya menghitung dengan total prediksi rekomendasi bedasarkan genre yang benar dibagi dengan total rekomendasi yang telah diberikan. Saya menggunakan metrik ini karena saya ingin mengetahui apakah model yang dipakai untuk *content-based learning* dapat memprediksi semua konten bedasarkan genre dengan benar. 
     
     
  Penggunaan kedua metrik tersebut bisa didapat dari model deep learning yang didapat saat melakukan model fitting pada data.  Dari hasil model tersebut, *mean absolute error* model ini adalah sebesar 0.1391 pada training dan 0.1516 pada test, sedangkan untuk *root mean squared error* model ini adalah 0.1815 pada tranining dan 0.1986 pada test. Hal ini menunjukan bahwa model ini memiliki error dibawah 20% jika menggunakan *mean absolute error* dan dibawah 20% jika menggunakan *root mean squared error*. Meskipun memiliki error sebesar kalimat sebelumnya, model ini masih bisa digunakan untuk sistem rekomendasi.
  
- Selain itu, untuk metrik *accurate* digunakan untuk mengevaluasi *cosine similarity*. Dari evaluasi ini, kita mendapatkan bahwa *cosine similarity* berfungsi dengan sempurna untuk merekomendasikan film karena hasil dari pengambilan sample secara acak menghasilkan akurasi 100% yang artinya tidak ada kesalahan dalam menggunakan *cosine similarity*
+ Selain itu, untuk metrik *precision* digunakan untuk mengevaluasi *cosine similarity*. Dari evaluasi ini, kita mendapatkan bahwa *cosine similarity* berfungsi dengan sempurna untuk merekomendasikan film karena hasil dari pengambilan sample secara acak menghasilkan akurasi 100% yang artinya tidak ada kesalahan dalam menggunakan *cosine similarity*
  
  
  ## Pernutup
